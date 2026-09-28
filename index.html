@@ -428,8 +428,9 @@
       for (const b of city.items) {
         const x = b.x + ox; if (x > W || x + b.w < 0) continue;
         for (let wy = baseY - b.h + 12; wy < baseY - 10; wy += 18)
-          for (let wx = x + 8; wx < x + b.w - 10; wx += 14)
-            if (((wx * 7 + wy * 13 + b.win * 100) | 0) % 5 === 0) ctx.fillRect(wx, wy, 6, 8);
+          for (let lx = 8; lx < b.w - 10; lx += 14)
+            // hash on the building's own coordinates so the lit windows stay fixed while it scrolls
+            if (((lx * 7 + wy * 13 + b.win * 100) | 0) % 5 === 0) ctx.fillRect(x + lx, wy, 6, 8);
       }
     }
   }
